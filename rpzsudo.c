@@ -12,19 +12,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 
-void printids(char *header)
-{
-    uid_t ruid, euid, saveduid;
-    gid_t rgid, egid, savedgid;
-    getresuid(&ruid, &euid, &saveduid);
-    getresgid(&rgid, &egid, &savedgid);
-    printf("%s ruid=%d euid=%d saveduid=%d "
-           "rgid=%d egid=%d savedgid=%d\n",
-           header,
-           ruid, euid, saveduid,
-           rgid, egid, savedgid);
-}
-
 uid_t parse(char *arg)
 {
     if(arg[0] == '#')
@@ -54,8 +41,6 @@ uid_t parse(char *arg)
 int main(int argc, char **argv)
 {
     uid_t user, group;
-    printids("initial:");
-    printf("argc = %d\n", argc);
     if(argc < 5)
     {
         fprintf(stderr,
@@ -86,7 +71,6 @@ int main(int argc, char **argv)
         perror("couldn't set uid");
         exit(1);
     }
-    printids("about to exec:");
 
     if(execv(argv[3], argv + 4) == -1)
         perror("Error: exec failed");
