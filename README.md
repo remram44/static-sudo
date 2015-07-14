@@ -19,12 +19,12 @@ Why is this needed?
 This is needed by the [ReproZip](https://github.com/ViDA-NYU/reprozip) project.
 The reprounzip component builds virtual machines and unpacks the files needed
 to reproduce an experiment, which might mean overwriting system libraries; a
-dynamically linked binary cannot be guaranteed to work after that. Busybox can
-be used as the shell, but a helper to get the uid/gid right is needed; this is
-it.
+dynamically linked binary cannot be guaranteed to work after that. A static
+build of Busybox can be used as the shell, but a helper to get the uid/gid
+right is needed; this is it.
 
 Reprounzip downloads the static binaries from this project's releases page:
 
     https://github.com/remram44/static-sudo/releases/download/current/rpzsudo-{arch}
 
-where ̀`{arch}` is one of: `i686`, `x86_64` (`uname -m`).
+where `{arch}` is one of: `i686`, `x86_64` (`uname -m`).
